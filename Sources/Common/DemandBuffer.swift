@@ -41,7 +41,7 @@ class DemandBuffer<S: Subscriber> {
     ///
     /// - returns: The demand fulfilled by the bufferr
     func buffer(value: S.Input) -> Subscribers.Demand {
-        precondition(self.completion == nil,
+        assert(self.completion == nil,
                      "How could a completed publisher sent values?! Beats me 🤷‍♂️")
 
         switch demandState.requested {
@@ -61,7 +61,7 @@ class DemandBuffer<S: Subscriber> {
     ///
     /// - parameter completion: Completion event
     func complete(completion: Subscribers.Completion<S.Failure>) {
-        precondition(self.completion == nil,
+        assert(self.completion == nil,
                      "Completion have already occured, which is quite awkward 🥺")
 
         self.completion = completion
